@@ -127,6 +127,7 @@
   },
   "defaultProject": "angular-github-actions",
   "cli": {
-    "analytics": false
+    "analytics": false,
+    "packageManager": "yarn"
   }
 }
