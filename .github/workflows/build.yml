@@ -10,14 +10,14 @@ jobs:
 
     steps:
       - name: Checkout project
-      - uses: actions/checkout@v1
+        uses: actions/checkout@v1
 
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
         run: echo "::set-output name=dir::$(yarn cache dir)"
 
       - name: Cache yarn
-      - uses: actions/cache@v1
+        uses: actions/cache@v1
         id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
         with:
           path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
@@ -29,6 +29,11 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 12.x
+
+      - name: yarn install
         run: |
           yarn install --frozen-lockfile --pure-lockfile
+
+      - name: yarn build:ci
+        run: |
           yarn build:ci
