@@ -29,11 +29,6 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 12.x
-
-      - name: yarn install
         run: |
           yarn install --frozen-lockfile --pure-lockfile
-
-      - name: yarn build:ci
-        run: |
           yarn build:ci
