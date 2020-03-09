@@ -7,9 +7,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [12.x]
 
     steps:
       - uses: actions/checkout@v1
@@ -42,4 +39,4 @@ jobs:
         run: |
           npm config set scripts-prepend-node-path auto
           yarn install --frozen-lockfile --pure-lockfile
-          yarn build:ci
+          yarn test
