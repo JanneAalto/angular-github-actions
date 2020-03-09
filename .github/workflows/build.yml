@@ -37,6 +37,5 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - name: yarn install && build:ci
         run: |
-          npm config set scripts-prepend-node-path auto
           yarn install --frozen-lockfile --pure-lockfile
           yarn test
