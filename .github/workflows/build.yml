@@ -29,7 +29,7 @@ jobs:
       - uses: actions/cache@v1
         id: modules-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
         with:
-          path: ~/node_modules
+          path: node_modules
           key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-modules-
