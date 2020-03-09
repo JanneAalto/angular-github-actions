@@ -9,12 +9,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Checkout project
       - uses: actions/checkout@v1
 
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
         run: echo "::set-output name=dir::$(yarn cache dir)"
 
+      - name: Cache yarn
       - uses: actions/cache@v1
         id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
         with:
@@ -23,6 +25,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-yarn-
 
+      - name: Cache node_modules
       - uses: actions/cache@v1
         id: modules-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
         with:
@@ -31,10 +34,15 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-node_modules-
 
-      - uses: borales/actions-yarn@v2.0.0
+      - name: Node 12.x
+        uses: actions/setup-node@v1
         with:
-          cmd: install --frozen-lockfile --pure-lockfile # will run `yarn install` command
+          node-version: 12.x
 
-      - uses: borales/actions-yarn@v2.0.0
-        with:
-          cmd: build:ci # will run `yarn lint` command
+      - name: yarn install
+        run: |
+          yarn install --frozen-lockfile --pure-lockfile
+
+      - name: yarn build:ci
+        run: |
+          yarn build:ci
